@@ -4,7 +4,6 @@ extension = "xlsx"
 
 def search_for_an_excel_file():
     count_of_file = search_extension(os.listdir())
-    #return search_extension(os.listdir())
     return count_of_file[0]
 
 
@@ -20,3 +19,6 @@ def search_extension(list):
 def pause():
     print("Для завершения нажмите Enter...")
     return input()
+
+def get_user():
+    return os.getlogin()
