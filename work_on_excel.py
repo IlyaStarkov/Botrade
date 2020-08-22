@@ -1,7 +1,7 @@
 import openpyxl
 import template
 import os
-from work_on_OS import search_extension
+from work_on_OS import search_extension, get_date, date_picker
 from openpyxl.styles import PatternFill
 
 
@@ -76,6 +76,13 @@ def paint_a_cell(cell, color):
                             fill_type='solid')
 
 def main_function():
+    date = date_picker()
+    acc = 0
+    four_capsules = 0
+    core_device = 0
+    one_capsules = 0
+    two_capsules = 0
+    three_capsules = 0
     name = get_name_of_file()
     wb = openpyxl.load_workbook(name)
     sheet = wb.active
@@ -87,36 +94,49 @@ def main_function():
         if items[i][1] == 1:  # Уст обычное + 4 пачке капсул
             if presents[i][0] == 4:
                 paint_a_cell(sheet['Y'][i + 1], "0000FF00")
+                four_capsules +=1
             else:
                 paint_a_cell(sheet['Y'][i + 1], "FFFF0000")
+                acc += 1
         elif items[i][0] == 2:  # 2+1
             if presents[i][0] == 1:
                 paint_a_cell(sheet['Y'][i + 1], "0000FF00")
+                one_capsules += 1
             else:
                 paint_a_cell(sheet['Y'][i + 1], "FFFF0000")
+                acc += 1
         elif items[i][0] == 3:  # 3 пачке капсул + уст обычное
             if presents[i][1] == 1:
                 paint_a_cell(sheet['Y'][i + 1], "0000FF00")
+                core_device += 1
             else:
                 paint_a_cell(sheet['Y'][i + 1], "FFFF0000")
+                acc += 1
         elif items[i][0] == 6:  # 6+3
             if presents[i][0] == 3:
                 paint_a_cell(sheet['Y'][i + 1], "0000FF00")
+                three_capsules += 1
             else:
                 paint_a_cell(sheet['Y'][i + 1], "FFFF0000")
+                acc += 1
         elif items[i][0] == 4:  # 4+2
             if presents[i][0] == 2:
                 paint_a_cell(sheet['Y'][i + 1], "0000FF00")
+                two_capsules += 1
             else:
                 paint_a_cell(sheet['Y'][i + 1], "FFFF0000")
+                acc += 1
         elif items[i][0] == 0 and items[i][1] == 0:
-            if presents[i][0] == 0 and presents[i][1]:
+            if presents[i][0] == 0 and presents[i][1] == 0:
                 pass
             else:
                 pass
         else:
             paint_a_cell(sheet['Y'][i + 1], "FFFF0000")
+            acc += 1
     for i in range(len(sheet["AG"])-1):
         if str(sheet["AG"][i+1].value).find("NEW Кардхол") != -1:
             paint_a_cell(sheet['Y'][i + 1], "FFFFFF00")
-    wb.save('отчет.xlsx')
+
+    wb.save("Reports/" + date + '_report.xlsx')
+    return four_capsules, core_device, one_capsules, two_capsules, three_capsules, date, acc
