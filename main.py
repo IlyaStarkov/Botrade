@@ -9,9 +9,9 @@ if validation_of_excel_file():
     print("Файл не соответствует шаблону")
     pause()
 else:
-    # if send_mail("logicApp@yandex.ru", "hczignejcbzufxxr", message.encode("utf-8")) == -1:
-    #     pause()
-    # else:
+    if send_mail("logicApp@yandex.ru", "hczignejcbzufxxr", message.encode("utf-8")) == -1:
+       pause()
+    else:
         make_folder()
         print("Начинаем проверку...\n")
         make_file(main_function())
