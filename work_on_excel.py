@@ -72,7 +72,6 @@ def calculating_the_number_of_items():
         count_of_case_present = 0
         list_of_purchased_products.append(one_action_buy)
         list_of_presented_products.append(one_action_present)
-    print(list_of_presented_products)
     return list_of_purchased_products, list_of_presented_products, zero_point
 
 
