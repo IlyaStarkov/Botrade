@@ -1,8 +1,8 @@
 import  smtplib
-from work_on_excel import get_name_of_file
-from work_on_OS import get_user, pause
+from work_on_excel import file_mame
+from work_on_OS import get_user
 
-message = "Запуск программы:\n\nИмя файла: " + get_name_of_file()\
+message = "Запуск программы:\n\nИмя файла: " + file_mame\
           + '\n' + "Пользователь: " + get_user()
 
 def send_mail(email, password, message):
